@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do list</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="container">
+        <h1 class="h1">TO-DO list</h1>
+        <input class="inputbox" id="input" placeholder="Add events">
+        <button class="addbtn" onclick="add()">ADD</button>
+
+        <ul class="list" id="list-container">
+            <li>
+                HELLO
+                <button onclick="deleteItem(event)">Remove</button>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        var input = document.getElementById("input");
+        var ul = document.getElementById("list-container");
+
+        function add() {
+            if (input.value.trim() === "") {
+                alert("Please enter something!");
+                return;
+            }
+
+            var listItem = document.createElement("li");
+            listItem.innerHTML = input.value + 
+                " <button onclick='deleteItem(event)'>Remove</button>";
+
+            ul.append(listItem);
+
+            input.value = ""; // Clear input after adding
+        }
+
+        function deleteItem(event) {
+            event.target.parentElement.remove();
+        }
+    </script>
+</body>
+</html>
