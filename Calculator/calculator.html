@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C A L C U L A T O R</title>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+
+<div class="calculator">
+
+    <div class="h1">
+        <h1>C A L C U L A T O R</h1>
+    </div>
+
+    <textarea id="display" placeholder="Enter values" readonly></textarea>
+
+    <div class="buttons">
+
+        <button class="clear" onclick="clearDisplay()">C</button>
+        <button onclick="appendToDisplay('/')" class="operator">/</button>
+        <button onclick="appendToDisplay('*')" class="operator">*</button>
+        <button onclick="deleteLast()" class="operator">DEL</button>
+
+        <button onclick="appendToDisplay('7')">7</button>
+        <button onclick="appendToDisplay('8')">8</button>
+        <button onclick="appendToDisplay('9')">9</button>
+        <button onclick="appendToDisplay('-')" class="operator">-</button>
+
+        <button onclick="appendToDisplay('4')">4</button>
+        <button onclick="appendToDisplay('5')">5</button>
+        <button onclick="appendToDisplay('6')">6</button>
+        <button onclick="appendToDisplay('+')" class="operator">+</button>
+
+        <button onclick="appendToDisplay('1')">1</button>
+        <button onclick="appendToDisplay('2')">2</button>
+        <button onclick="appendToDisplay('3')">3</button>
+        <button onclick="calculateResult()" class="operator1">=</button>
+
+        <button onclick="appendToDisplay('0')">0</button>
+        <button onclick="appendToDisplay('.')" class="operator2">.</button>
+
+    </div>
+
+</div>
+
+<script>
+    const display = document.getElementById('display');
+    let currentInput = "";
+
+    function appendToDisplay(input) {
+        currentInput += input;
+        display.value += input;
+    }
+
+    function clearDisplay() {
+        currentInput = "";
+        display.value = "";
+    }
+
+    function deleteLast() {
+        currentInput = currentInput.slice(0, -1);
+
+        let lines = display.value.split("\n");
+        let lastLine = lines[lines.length - 1];
+
+        lastLine = lastLine.slice(0, -1);
+        lines[lines.length - 1] = lastLine;
+
+        display.value = lines.join("\n");
+    }
+
+    function calculateResult() {
+        try {
+            let result = eval(currentInput);
+
+            display.value += " = " + result + "\n";
+
+            currentInput = "";
+        } catch (error) {
+            display.value += " Error\n";
+            currentInput = "";
+        }
+    }
+</script>
+
+</body>
+</html>
